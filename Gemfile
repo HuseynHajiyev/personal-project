@@ -44,6 +44,8 @@ gem "bootsnap", require: false
 
 gem 'jsbundling-rails'
 
+gem 'faker'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
