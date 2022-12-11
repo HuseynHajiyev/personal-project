@@ -1,9 +1,13 @@
+# frozen_string_literal: true
+
 module Api
+  # comment
   module V1
+    # comment
     class PlacesController < ApplicationController
       protect_from_forgery with: :null_session
       def index
-        places = Place.all.map do |place|
+        places = Place.all.first(50).map do |place|
           {
             name: place.name,
             city: place.city,
@@ -12,7 +16,7 @@ module Api
             number_of_measurements: number_of_measurements(place)
           }
         end
-        render json: { count: InternetSpeed.count, data: places }.to_json
+        render json: { places: }
       end
 
       private
