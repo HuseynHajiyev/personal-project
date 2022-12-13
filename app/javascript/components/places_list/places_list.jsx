@@ -7,9 +7,10 @@ import { Table } from './table'
 const PlacesList = () => {
   const [loading, setLoading] = useState(true)
   const [loadedPlaces, setLoadedPlaces] = useState([])
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
-    const apiEndPoint = "/api/v1/places"
+    const apiEndPoint = `/api/v1/places?search=${search}`
     fetch(apiEndPoint)
       .then(response => response.json())
       .then(data => {
