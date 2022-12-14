@@ -1,1 +1,1 @@
-import './components/places_list/places_list'
+import './components/index/places_list/places_list'
