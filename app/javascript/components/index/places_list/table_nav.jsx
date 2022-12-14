@@ -13,9 +13,7 @@ export const TableNav = (props) => {
       </div>
     </div>
     <div className="flex items-center justify-evenly">
-      <form className="flex items-center"
-        method='GET'
-      >
+      <form className="flex items-center">
         <label form="simple-search" className="sr-only">Search</label>
         <div className="relative w-full">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -27,7 +25,7 @@ export const TableNav = (props) => {
             placeholder="Search"
             autoComplete="off"
             required
-            onSubmit={props.searchFunc}
+            onChange={props.searchFunc}
             />
         </div>
       </form>

@@ -11,24 +11,24 @@ const PlacesList = () => {
   const [loadedPlaces, setLoadedPlaces] = useState([])
   const [search, setSearch] = useState('')
 
-  const onSearchChange = (e) => {
-    e.preventDefault()
-    setLoading(true)
-    setSearch(e.tartget.value)
-  }
   useEffect(() => {
     const apiEndPoint = `/api/v1/places?search=${search}`
     fetch(apiEndPoint)
-      .then(response => response.json())
-      .then(data => {
+    .then(response => response.json())
+    .then(data => {
       setLoadedPlaces(data["places"])
       setLoading(false)
     })
   }, [search])
 
+  const onSearchChange = (event) => {
+    event.preventDefault()
+    setLoading(true)
+    setSearch(event.target.value)
+  }
 
   const loadingSection = (<div>Loading..</div>)
-  const dataSection = loadedPlaces.length == 0 ? (<div></div>) : (
+  const dataSection = loadedPlaces.length == 0 && !loading ? (<tbody><tr>No Results<td></td></tr></tbody>) : (
     <PlacesListWrapper nav={<TableNav searchFunc={ onSearchChange } />}>
       <Table loadedPlaces={ loadedPlaces } />
     </PlacesListWrapper>
@@ -36,7 +36,7 @@ const PlacesList = () => {
 
   return(
     <PlacesListWrapper nav={<TableNav searchFunc={ onSearchChange } />}>
-        {loading ? (<div>Loading...</div>): <Table loadedPlaces={ loadedPlaces } />}
+        {loading ? (<tbody><tr><td>Loading...</td></tr></tbody>): <Table loadedPlaces={ loadedPlaces } />}
     </PlacesListWrapper>
   )
 }
