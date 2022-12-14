@@ -4,6 +4,7 @@ class InternetSpeed < ApplicationRecord
   after_save :update_place_speeds
 
   private
+
   def update_place_speeds
     place = self.place
     place.avg_download_speed = avg_download_speed(place)
@@ -11,6 +12,7 @@ class InternetSpeed < ApplicationRecord
     place.number_of_measurements = number_of_measurements(place)
     place.save
   end
+
   def avg_download_speed(place)
     (place.internet_speeds.where(download_units: most_frequent_units(place)).map(&:download_speed).sum / place.internet_speeds.count).round(2)
   end
@@ -22,6 +24,4 @@ class InternetSpeed < ApplicationRecord
   def number_of_measurements(place)
     place.internet_speeds.count
   end
-
-
 end

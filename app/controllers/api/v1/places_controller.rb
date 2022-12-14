@@ -7,7 +7,7 @@ module Api
     class PlacesController < ApplicationController
       protect_from_forgery with: :null_session
       def index
-        places = get_search_results(params['search']).map do |place|
+        places = get_search_results(search_params).map do |place|
           {
             name: place.name,
             city: place.city,
@@ -16,17 +16,24 @@ module Api
             number_of_measurements: place.number_of_measurements
           }
         end
+        puts places
         render json: { places: }
       end
 
       private
 
       def get_search_results(search)
+        puts "YOOOOOOOOO"
+        puts search
         if search.blank?
           Place.all
         else
-          Place.where('name LIKE ? OR city LIKE ?', '%search%', '%search%')
+          Place.where('name LIKE :search OR city LIKE :search', search:)
         end
+      end
+
+      def search_params
+        params['search']
       end
     end
   end
