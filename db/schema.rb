@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_04_213418) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_14_074851) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -31,6 +31,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_04_213418) do
     t.string "city", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "avg_download_speed"
+    t.string "most_frequent_units"
+    t.integer "number_of_measurements"
   end
 
   add_foreign_key "internet_speeds", "places"
